@@ -1,15 +1,14 @@
 class Room {
     // field, constructor, and 
     // method declarations
-    int hotelID
-    int roomType
-    boolean[900] isAvailable
-    String[900] date
-    int hotelID
-    String[900] bookedBy
+    int hotelID;
+    int roomType;
+    boolean[] isAvailable;
+    String[] date;
+    String[] bookedBy;
 
-    public Room(int hotelID, int roomType, boolean[900] isAvailable, String[900] date,
-        int hotelID, String[900] bookedBy){
+    public Room(int hotelID, int roomType, boolean[] isAvailable, String[] date	
+    		, String[] bookedBy){
 
         this.hotelID = hotelID;
         this.roomType = roomType;
@@ -19,15 +18,15 @@ class Room {
         this.bookedBy = bookedBy;
     }
 
-    public string getIsAvailabel(){
-    	return isAvailable
+    public boolean[] getIsAvailabel(){
+    	return isAvailable;
     }
 
-    public string getDate(){
-    	return date
+    public String[] getDate(){
+    	return date;
     }
 
-    public string getBooker(){
-    	return bookedBy
+    public String[] getBooker(){
+    	return bookedBy;
     }
 }

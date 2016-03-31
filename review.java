@@ -1,10 +1,10 @@
 class Review {
     // field, constructor, and 
     // method declarations
-    int hotelID
-    int rating
-    int reviewID
-    String description
+    int hotelID;
+    int rating;
+    int reviewID;
+    String description;
 
     public Review(int hotelID, int rating, int reviewID, String description){
 
@@ -13,12 +13,13 @@ class Review {
         this.reviewID = reviewID;
         this.description = description;      
     }
-    public int getRating(int){
-    	return rating
+    
+    public int getRating(){
+    	return rating;
     }
 
-    public String getDescription(int){
-    	return description
+    public String getDescription(){
+    	return description;
     }
 
 }

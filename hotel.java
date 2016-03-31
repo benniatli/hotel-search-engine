@@ -1,17 +1,17 @@
 class Hotel {
     // field, constructor, and 
     // method declarations
-    String hotelName
-    int postalCode
-    int avgCostPerNight
-    int stars
-    String description
-    int rating
-    int iD
-    Review[] review
-    Room[] room
+    String hotelName;
+    String postalCode;
+    int avgCostPerNight;
+    int stars;
+    String description;
+    int rating;
+    int iD;
+    Review[] review;
+    Room[] room;
 
-    public Hotel(String hotelName,int postalCode, int avgCostPerNight, int stars, String description
+    public Hotel(String hotelName,String postalCode, int avgCostPerNight, int stars, String description
         , int rating, int iD, Review[] review, Room[] room){
         this.postalCode = postalCode;
         this.avgCostPerNight = avgCostPerNight;
@@ -24,26 +24,26 @@ class Hotel {
     }
 
     public String getName(){
-    	return hotelName
+    	return hotelName;
     }
 
     public String getP(){
-    	return postalCode
+    	return postalCode;
     }
 
     public int getCost(){
-    	return avgCostPerNight
+    	return avgCostPerNight;
     }
 
     public String getDescr(){
-    	return description
+    	return description;
     }	
 
     public int getRating(){
-    	return rating
+    	return rating;
     }
 
     public int getID(){
-    	return iD
+    	return iD;
     }
 }

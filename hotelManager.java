@@ -1,6 +1,8 @@
 class hotelManager {
     // field, constructor, and 
     // method declarations
+	
+	/*
     public boolean isAvailable(Hotel hotel, String date, int nrOfNights, int roomType){
     //????
     }
@@ -9,7 +11,8 @@ class hotelManager {
     //????	
     }
 
-    public List<Hotel> searchHotel(String date, int nrOfNights, int roomType, String loc, String name, int minPrice, int maxPrice){
+    public Hotel[] searchHotel(String date, int nrOfNights, int roomType, String loc, String name, int minPrice, int maxPrice){
     //????	
     }
+    */
 }
