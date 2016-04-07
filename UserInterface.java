@@ -17,15 +17,16 @@ class UserInterface {
     int maxPrice;
     int minPrice;
     int nrOfNights;
+    int nrOfPersons;
     private Hotel[] results;
 
-    public Hotel[] searchHotel(String date, int nrOfNights, String loc, String name, int stars, int minPrice, int maxPrice) throws ParseException{
-    	 System.out.println("n");
+    public Hotel[] searchHotel(String date, int nrOfNights,  int nrOfPersons, String loc, String name, int stars, int minPrice, int maxPrice) throws ParseException{
     	HotelManager manager = new HotelManager();
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Date d = df.parse(date);
-		long dateInt = d.getTime()/ (24 * 60 * 60 * 1000)-16801; // breyta í 16800 ef fyrsti dagur í töflu er 1 en ekki 0
-		System.out.println(dateInt);
+		long dateInt = d.getTime()/ (24 * 60 * 60 * 1000)-16801; // breyta ï¿½ 16800 ef fyrsti dagur ï¿½ tï¿½flu er 1 en ekki 0
+		
+		int avgPrice = maxPrice/(nrOfNights*nrOfPersons);
 		
 		return results = manager.searchHotel(dateInt, nrOfNights, loc, name, stars, minPrice, maxPrice);	
     }
@@ -34,7 +35,7 @@ class UserInterface {
     HotelManager manager = new HotelManager();
 	DateFormat df = new SimpleDateFormat("yyyyMMdd");
 	Date d = df.parse(date);
-	long dateInt = d.getTime()/ (24 * 60 * 60 * 1000)-16801; // breyta í 16800 ef fyrsti dagur í töflu er 1 en ekki 0
+	long dateInt = d.getTime()/ (24 * 60 * 60 * 1000)-16801; // breyta ï¿½ 16800 ef fyrsti dagur ï¿½ tï¿½flu er 1 en ekki 0
 	System.out.println(dateInt);
     
     return manager.bookHotel(hotel, dateInt, nrOfNights, roomType, bookingName);
@@ -47,6 +48,6 @@ class UserInterface {
     
 	public static void main(String[] args) throws ParseException{
 		UserInterface notkun1 = new UserInterface();
-		notkun1.searchHotel("20161231", 2, "dd", "ff", 4, 2, 8);
+		notkun1.searchHotel("20161231", 2,2, "dd", "ff", 4, 2, 8);
 	}
 }
