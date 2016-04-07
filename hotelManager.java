@@ -1,18 +1,24 @@
-class hotelManager {
-    // field, constructor, and 
-    // method declarations
+
+public class HotelManager {
+
 	
-	/*
-    public boolean isAvailable(Hotel hotel, String date, int nrOfNights, int roomType){
-    //????
-    }
-
-    public String bookHotel(Hotel hotel, String date, int nrOfNights, int roomType, String bookingName){
-    //????	
-    }
-
-    public Hotel[] searchHotel(String date, int nrOfNights, int roomType, String loc, String name, int minPrice, int maxPrice){
-    //????	
-    }
-    */
+	public static Hotel[] searchHotel(String date, int nrOfNights, String Loc, String name,
+									int stars, int MaxPrice, int MinPrice){
+		Hotel[] foundHotels = DBManager.searchHotel(date, nrOfNights, Loc, name, stars, MaxPrice, MinPrice);
+		return foundHotels;
+	}
+	
+	public static String bookHotel(Hotel hotel, String date, int nrOfNights, int roomtype, String bookingName){
+		String booking = DBManager.bookHotel(hotel, date, nrOfNights, roomtype, bookingName);
+		return booking;
+	}
+	
+	
+	// reviews = HotelManager.getReviews()
+	public static Review[] getReviews(){
+		//need to find reviews
+		Review[] reviews = new Review[1];
+		return reviews;
+	}
+	
 }
