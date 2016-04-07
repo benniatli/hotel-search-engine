@@ -1,49 +1,37 @@
-class Hotel {
-    // field, constructor, and 
-    // method declarations
-    String hotelName;
-    String postalCode;
-    int avgCostPerNight;
-    int stars;
-    String description;
-    int rating;
-    int iD;
-    Review[] review;
-    Room[] room;
+public class Hotel {
+	private String name, description;
+	private int stars, price, ID, postalCode;
+	
+	public Hotel(String name, int stars, int price, int postalCode, int ID, String description){
+		this.name = name;
+		this.stars = stars;
+		this.price = price;
+		this.postalCode = postalCode;
+		this.ID = ID;
+		this.description = description;
+	}
 
-    public Hotel(String hotelName,String postalCode, int avgCostPerNight, int stars, String description
-        , int rating, int iD, Review[] review, Room[] room){
-        this.postalCode = postalCode;
-        this.avgCostPerNight = avgCostPerNight;
-        this.stars = stars;
-        this.description = description;
-        this.rating = rating;
-        this.iD = iD;
-        this.review = review;
-        this.room = room;
-    }
-
-    public String getName(){
-    	return hotelName;
-    }
-
-    public String getP(){
-    	return postalCode;
-    }
-
-    public int getCost(){
-    	return avgCostPerNight;
-    }
-
-    public String getDescr(){
-    	return description;
-    }	
-
-    public int getRating(){
-    	return rating;
-    }
-
-    public int getID(){
-    	return iD;
-    }
+	public String getName(){
+		return name;
+	}
+	
+	public int getStars(){
+		return stars;
+	}
+	
+	public int getPrice(){
+		return price;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	public int getPostalCode(){
+		return postalCode;
+	}
+	
+	public int getID(){
+		return ID;
+	}
 }
