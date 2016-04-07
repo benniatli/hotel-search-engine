@@ -4,7 +4,7 @@ class UserInterface {
     Hotel hotel;
     String firstName;
     String lastName;
-    String date;
+    int date;
     String location;
     String hotelName;
     int postalCode;
@@ -12,19 +12,30 @@ class UserInterface {
     int maxPrice;
     int minPrice;
     int nrOfNights;
-/*
+    private Hotel[] results;
+
     public Hotel[] searchHotel(String date, int nrOfNights, String loc, String name, int stars, int minPrice, int maxPrice){
-    //????
+		HotelManager manager = new HotelManager();
+		
+		return results = manager.searchHotel(date, nrOfNights, loc, name, stars, minPrice, maxPrice);
 
     }
 
     public String bookHotel(Hotel hotel, String date, int nrOfNights, int roomType, String bookingName, int whichLine){
-    //????
+    HotelManager manager = new HotelManager();
+    
+    return manager.bookHotel(hotel, date, nrOfNights, roomType, bookingName);
     }
 
     public String displayResult(Hotel[] hotels){
-    //????
+    System.out.println((results[1].getName()));
+    return results[1].getName();
     }
     
-    */
+	public static void main(String[] args){
+		UserInterface notkun1 = new UserInterface();
+		notkun1.displayResult(notkun1.results);
+		System.out.println((notkun1.results[1].getName()));
+		
+	}
 }
