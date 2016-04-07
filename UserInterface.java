@@ -15,14 +15,14 @@ class UserInterface {
     private Hotel[] results;
 
     public Hotel[] searchHotel(String date, int nrOfNights, String loc, String name, int stars, int minPrice, int maxPrice){
-		HotelManager2 manager = new HotelManager2();
+		HotelManager manager = new HotelManager();
 		
 		return results = manager.searchHotel(date, nrOfNights, loc, name, stars, minPrice, maxPrice);
 
     }
 
     public String bookHotel(Hotel hotel, String date, int nrOfNights, int roomType, String bookingName, int whichLine){
-    HotelManager2 manager = new HotelManager2();
+    HotelManager manager = new HotelManager();
     
     return manager.bookHotel(hotel, date, nrOfNights, roomType, bookingName);
     }
