@@ -90,6 +90,7 @@ public class DBManager {
 		}
 		return totalPrice;
 	}
+	//athugar hvort tiltekid hotel hefur laus herbergi eftir uppskrift roomAmounts fyrir gefnar dagsetningar
 	private static boolean areThereRoomsAvailable(int date, int nrOfNights,int[] roomAmounts, int HotelID){
 		Connection c = null;
 		Statement stmt = null;
@@ -134,6 +135,7 @@ public class DBManager {
 		}
 		return isAvail;
 	}
+	// Athugar hvort tiltekid herbergi se laust fyrir gefnar dagsetningar
 	private static boolean isRoomAvailable(int date,int nrOfNights, int RoomID){
 		boolean isAvail = true;
 		Connection c = null;
@@ -161,7 +163,54 @@ public class DBManager {
 	}
 
 	//Mock Object
-	public static String bookHotel(Hotel hotel, int date, int nrOfNights, int roomtype,
+	public static String bookHotel(Hotel hotel, int date, int nrOfNights, 
+			String bookingName, int[] roomAmount){
+		String bokunarSkilabod = "";
+		Connection c = null;
+		Statement stmt = null;
+		if(!areThereRoomsAvailable(date,nrOfNights,roomAmount,hotel.getID())){
+			bokunarSkilabod = "Thvi midur eru ekki thessi samsetning herbergja laus a thessu hoteli fyrir thessar dagsetningar.";
+			
+		}
+		else{
+			try{
+				Class.forName("org.sqlite.JDBC");
+				c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
+				c.setAutoCommit(false);
+				stmt = c.createStatement();
+				for(int i = 0; i<roomAmount.length;i++){
+					int bookingCount = 0;
+					ResultSet rs = stmt.executeQuery("SELECT * FROM Rooms WHERE hotelId = " + hotel.getID() +
+							" AND RoomSpace = " + (i+1) + ";");
+					while(rs.next()){
+						int roomID = rs.getInt("Id");
+						if(isRoomAvailable(date, nrOfNights, roomID)){
+							for(int j = date; j < date+nrOfNights;j++){
+								String sql = "UPDATE Rooms set '" + j + "' = '" + bookingName +
+										"' WHERE Id = '" + roomID + "';";
+								stmt.executeUpdate(sql);
+								c.commit();
+								bookingCount++;
+							}
+							if(bookingCount>roomAmount[i]){
+								break;
+							}
+						}
+					}
+				}
+				bokunarSkilabod = "Bokun tokst, Jeij.";
+			}
+			catch ( Exception e ) {
+				System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+				System.exit(0);
+			}
+		}
+		
+		//	public Hotel(String name, int stars, int price, String postalCode, int ID, String description){
+		
+		return bokunarSkilabod;
+	}
+	public static String bookHotel2(Hotel hotel, int date, int nrOfNights, int roomtype,
 			String bookingName, int[] roomAmount){
 		int roomSize;
 		Boolean[] Booked = new Boolean[roomAmount.length];

@@ -9,9 +9,9 @@ public class HotelManager {
 		return foundHotels;
 	}
 	
-	public String bookHotel(Hotel hotel, int date, int nrOfNights, int roomtype, String bookingName, int[] roomAmounts){
+	public String bookHotel(Hotel hotel, int date, int nrOfNights, String bookingName, int[] roomAmounts){
 		DBManager dbbook = new DBManager();
-		String booking = dbbook.bookHotel(hotel, date, nrOfNights, roomtype, bookingName, roomAmounts);
+		String booking = dbbook.bookHotel(hotel, date, nrOfNights, bookingName, roomAmounts);
 		return booking;
 	}
 	

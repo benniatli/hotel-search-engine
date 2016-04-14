@@ -34,11 +34,11 @@ class UserInterface {
 
 	
 	
-	public String bookHotel(Hotel hotel, String date, int nrOfNights, int roomType, String bookingName, int[] roomAmounts, int whichLine) throws ParseException{
+	public String bookHotel(Hotel hotel, String date, int nrOfNights, String bookingName, int[] roomAmounts, int whichLine) throws ParseException{
 		HotelManager manager = new HotelManager();
 
 		int dateInt = (int) convertDate(date);
-		return manager.bookHotel(hotel, dateInt, nrOfNights, roomType, bookingName, roomAmounts);
+		return manager.bookHotel(hotel, dateInt, nrOfNights,bookingName, roomAmounts);
 	}
 
 
