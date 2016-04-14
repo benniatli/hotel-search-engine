@@ -2,16 +2,16 @@
 public class HotelManager {
 
 	
-	public Hotel[] searchHotel(long date, int nrOfNights, String Loc, String name,
-									int stars, int MaxPrice, int MinPrice){
+	public Hotel[] searchHotel(int date, int nrOfNights, String Loc, String name,
+									int stars, int[] roomAmounts, int MaxPrice, int MinPrice){
 		DBManager dbsearch = new DBManager();
-		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, MaxPrice, MinPrice);
+		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, roomAmounts, MaxPrice, MinPrice);
 		return foundHotels;
 	}
 	
-	public String bookHotel(Hotel hotel, long date, int nrOfNights, int roomtype, String bookingName){
+	public String bookHotel(Hotel hotel, int date, int nrOfNights, int roomtype, String bookingName, int[] roomAmounts){
 		DBManager dbbook = new DBManager();
-		String booking = dbbook.bookHotel(hotel, date, nrOfNights, roomtype, bookingName);
+		String booking = dbbook.bookHotel(hotel, date, nrOfNights, roomtype, bookingName, roomAmounts);
 		return booking;
 	}
 	

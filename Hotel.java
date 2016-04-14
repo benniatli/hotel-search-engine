@@ -1,5 +1,5 @@
 public class Hotel {
-	private String name, description;
+	public String name, description;
 	private int stars, price, ID, postalCode;
 	
 	public Hotel(String name, int stars, int price, int postalCode, int ID, String description){

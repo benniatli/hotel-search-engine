@@ -5,8 +5,8 @@ public class DBManager {
 	//private static Room hilton1 = new Room(1, 1, {"2016-02-21", "2016-02-22"}, {"",""}, {true, true});
 	
 	//Mock Object
-	public static Hotel[] searchHotel(long date, int nrOfNights, String Loc, String name,
-									int stars, int MaxPrice, int MinPrice){
+	public static Hotel[] searchHotel(int date, int nrOfNights, String Loc, String name,
+									int stars, int[] roomAmounts, int MaxPrice, int MinPrice){
 		//Search for available hotels
 		Hotel[] listOfHotels = new Hotel[3];
 		listOfHotels[0] = Hilton;
@@ -16,10 +16,10 @@ public class DBManager {
 	}
 	
 	//Mock Object
-	public static String bookHotel(Hotel hotel, long date, int nrOfNights, int roomtype, String bookingName){
+	public static String bookHotel(Hotel hotel, int date, int nrOfNights, int roomtype, String bookingName, int[] roomAmounts){
 		//Try to book hotel...
 
-		return "DBManager bookHotel() tokst.";
+		return "Bókun tókst";
 	}
 	
 	/*public static Room[] getRooms(int hotelId, String date, int nrOfNights){
