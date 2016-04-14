@@ -55,7 +55,7 @@ class UserInterface {
 	public long convertDate(String date) throws ParseException{
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Date d = df.parse(date);
-		int dateInt = (int) (d.getTime()/ (24 * 60 * 60 * 1000)-16801);// breyta í 16800 ef fyrsti dagur � t�flu er 1 en ekki 0
+		int dateInt = (int) (d.getTime()/ (24 * 60 * 60 * 1000)-16800);// breyta í 16802 ef fyrsti dagur � t�flu er 1 en ekki 0
 		return dateInt;
 	}
 
@@ -65,8 +65,7 @@ class UserInterface {
 
 		UserInterface session = new UserInterface();	
 		int[] arr = {1,2,0,0};
-
-		displayResult(session.searchHotel("20161231", 2,2, "dd", "ff",4,8,arr));
+		displayResult(session.searchHotel("20160101", 2,2, "", "",2,-1,arr));
 
 			
 	}	
