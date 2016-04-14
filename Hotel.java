@@ -1,8 +1,8 @@
 public class Hotel {
-	public String name, description;
-	private int stars, price, ID, postalCode;
+	public String name, description, postalCode;
+	private int stars, price, ID;
 	
-	public Hotel(String name, int stars, int price, int postalCode, int ID, String description){
+	public Hotel(String name, int stars, int price, String postalCode, int ID, String description){
 		this.name = name;
 		this.stars = stars;
 		this.price = price;
@@ -27,7 +27,7 @@ public class Hotel {
 		return description;
 	}
 	
-	public int getPostalCode(){
+	public String getPostalCode(){
 		return postalCode;
 	}
 	

@@ -3,9 +3,9 @@ public class HotelManager {
 
 	
 	public Hotel[] searchHotel(int date, int nrOfNights, String Loc, String name,
-									int stars, int[] roomAmounts, int MaxPrice, int MinPrice){
+									int stars, int[] roomAmounts, int MaxPrice){
 		DBManager dbsearch = new DBManager();
-		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, roomAmounts, MaxPrice, MinPrice);
+		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, roomAmounts, MaxPrice);
 		return foundHotels;
 	}
 	

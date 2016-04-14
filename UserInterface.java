@@ -27,11 +27,13 @@ class UserInterface {
 		HotelManager manager = new HotelManager();
 
 		int dateInt = (int) convertDate(date);
-		int avgPrice = maxPrice/(nrOfNights*nrOfPersons);
-
-		return  manager.searchHotel(dateInt, nrOfNights, loc, name, stars, roomAmounts, minPrice, maxPrice);	
+		
+		
+		return  manager.searchHotel(dateInt, nrOfNights, loc, name, stars, roomAmounts, maxPrice);	
 	}
 
+	
+	
 	public String bookHotel(Hotel hotel, String date, int nrOfNights, int roomType, String bookingName, int[] roomAmounts, int whichLine) throws ParseException{
 		HotelManager manager = new HotelManager();
 
@@ -65,7 +67,7 @@ class UserInterface {
 		int[] arr = {1,2,0,0};
 
 		displayResult(session.searchHotel("20161231", 2,2, "dd", "ff",4,arr, 2, 8));
-		//býr til lista með hótelunum sem sem uppfylla leitarskilyrði frá notanda	
+
 			
 	}	
 	
