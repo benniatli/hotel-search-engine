@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DBManager {
-	private static Hotel Hilton = new Hotel("Hotel Hilton", 5, 12000, "101", 1, "Great hotel downtown.");
-	private static Hotel Hafnafjordur = new Hotel("Hotel Hafnafjordur", 3, 5000,"300", 2, "Faraway from everything.");
-	private static Hotel Saga = new Hotel("Radison BLU", 4, 10000, "101", 3, "Hotel near the University");
-	//private static Room hilton1 = new Room(1, 1, {"2016-02-21", "2016-02-22"}, {"",""}, {true, true});
-
+	// searchhotel leitar ad hoteli fyrir gefna komudagsetningu, fjolda gistinotta,
+	// stadsetningu, nafns a hoteli, stjornufjolda, hamarksverds og samsetningu a herbergjum 
+	// sem oskad er eftir. Skilda er ad fylla ut i komudagsetningu, fjolda gistinotta og 
+	// samsetningu herbergja.
+	// Fallid skilar fylki af hotel objectum. 
 	public static Hotel[] searchHotel(int date, int nrOfNights, String Loc, String HotelName,
 			int stars, int MaxPrice, int[] roomAmounts){
 		Connection c = null;
@@ -48,11 +48,9 @@ public class DBManager {
 				MaxPrice = Integer.MAX_VALUE;
 			}
 			String sql = "Select * from Hotels where "+ nameString+" AND " +LocationString+" AND "+StarString+ ";";
-			//System.out.println(sql);
 
 			ResultSet rs = stmt.executeQuery(sql);
 			int countFound = 0;
-			///*
 			while ( rs.next() ) {
 				int HotelID = rs.getInt("Id");
 				String  currHotelName = rs.getString("Name");
@@ -67,19 +65,21 @@ public class DBManager {
 					hotelsFound[countFound] = newHotel;
 					countFound++;
 				}
-
-				//if(areThereRoomsAvailable(int date, int nrOfNights,int[] roomAmounts, int HotelID));	         
 			}
 			returnHotels = new Hotel[countFound];
 			for(int i = 0; i<countFound;i++){
 				returnHotels[i] = hotelsFound[i];
 			}
+			c.close();
+
 			//*/
 		} catch ( Exception e ) {
 			returnHotels = new Hotel[0];
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
+		
+
 		return returnHotels;
 
 	}
@@ -99,7 +99,6 @@ public class DBManager {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
-			//System.out.println("Opened database successfully");
 			stmt = c.createStatement();
 			String sql = "Select * from Rooms where hotelID="+HotelID+";";
 			ResultSet rs = stmt.executeQuery(sql);
@@ -121,6 +120,7 @@ public class DBManager {
 					count[3]++;
 				}
 			} 
+			c.close();
 
 		}
 		catch ( Exception e ) {
@@ -152,6 +152,8 @@ public class DBManager {
 					isAvail = false;
 				}
 			}
+			c.close();
+
 		} 
 		catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -162,7 +164,9 @@ public class DBManager {
 
 	}
 
-	//Mock Object
+	// Fall sem bokar tiltekid hotel fyrir tilteknar dagsetningu (komudagsetningu) og fjodla gistinotta
+	// og bokunarnafn og samsetningu herbergja sem oskad er eftir.
+	// Fallid skilar streng sem segir hvort bokun hafi tekist eda ekki.
 	public static String bookHotel(Hotel hotel, int date, int nrOfNights, 
 			String bookingName, int[] roomAmount){
 		String bokunarSkilabod = "";
@@ -186,7 +190,7 @@ public class DBManager {
 						int roomID = rs.getInt("Id");
 						if(isRoomAvailable(date, nrOfNights, roomID)){
 							for(int j = date; j < date+nrOfNights;j++){
-								String sql = "UPDATE Rooms set '" + j + "' = '" + bookingName +
+								String sql = "UPDATE Rooms set '" + Integer.toString(j) + "' = '" + bookingName +
 										"' WHERE Id = '" + roomID + "';";
 								stmt.executeUpdate(sql);
 								c.commit();
@@ -197,7 +201,11 @@ public class DBManager {
 							}
 						}
 					}
+					rs.close();
+
 				}
+				stmt.close();
+				c.close();
 				bokunarSkilabod = "Bokun tokst, Jeij.";
 			}
 			catch ( Exception e ) {
@@ -205,89 +213,7 @@ public class DBManager {
 				System.exit(0);
 			}
 		}
-		
-		//	public Hotel(String name, int stars, int price, String postalCode, int ID, String description){
-		
+
 		return bokunarSkilabod;
 	}
-	public static String bookHotel2(Hotel hotel, int date, int nrOfNights, int roomtype,
-			String bookingName, int[] roomAmount){
-		int roomSize;
-		Boolean[] Booked = new Boolean[roomAmount.length];
-		for (int j=0; j<roomAmount.length; j++){
-			Connection c = null;
-			Statement stmt = null;
-			roomSize = roomAmount[j];
-
-			try {
-				Class.forName("org.sqlite.JDBC");
-				c = DriverManager.getConnection("jdbc:sqlite:HotelSearch.db");
-				c.setAutoCommit(false);
-				stmt = c.createStatement();
-				int hotelID = hotel.getID();
-
-				ResultSet rs = stmt.executeQuery("SELECT * FROM Rooms WHERE hotelId = " + hotelID +
-						" AND RoomSpace = " + roomSize + ";");
-
-				Boolean avail = true;
-				String[] available = new String[368];
-
-				while (rs.next() && !Booked[j]) {
-					int id = rs.getInt("Id");
-					for (int i=0; i<368; i++){
-						available[i] = rs.getString(i+1);
-						//System.out.println(i-2 + ": " +  available[i]);
-					}
-					//Try to find available room:
-					for (int i=date; i<date+nrOfNights; i++){
-						if(!available[i+3].equals("")){
-							avail=false;
-						}
-						//System.out.println(avail);
-					}
-					if(avail){
-						String sql;
-						for (int i=date; i<date+nrOfNights; i++){
-							sql = "UPDATE Rooms set '" + i + "' = '" + bookingName +
-									"' WHERE Id = '" + id + "';";
-							stmt.executeUpdate(sql);
-							c.commit();
-						}
-						Booked[j] = true;
-					}
-					else{
-						Booked[j] = false;
-					}
-					avail = true;
-				}
-
-				rs.close();
-				stmt.close();
-				c.close();
-			} 
-			catch ( Exception e ) {
-				System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-				System.exit(0);
-			}
-
-		}
-		Boolean retn = false;
-		for (int k=0;k<Booked.length;k++){
-			if(Booked[k]){
-				retn = true;
-			}
-		}
-		if(retn){
-			return "Booking complete.";
-		}
-		else{
-			return "Booking unsuccessful!";
-		}
-	}
-
-	/*public static Room[] getRooms(int hotelId, String date, int nrOfNights){
-
-	}
-	 */
-
 }

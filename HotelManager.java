@@ -1,7 +1,6 @@
 
 public class HotelManager {
 
-	
 	public Hotel[] searchHotel(int date, int nrOfNights, String Loc, String name,
 									int stars, int MaxPrice, int[] roomAmounts){
 		DBManager dbsearch = new DBManager();

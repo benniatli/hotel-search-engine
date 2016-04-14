@@ -34,7 +34,7 @@ class UserInterface {
 
 	
 	
-	public String bookHotel(Hotel hotel, String date, int nrOfNights, String bookingName, int[] roomAmounts, int whichLine) throws ParseException{
+	public String bookHotel(Hotel hotel, String date, int nrOfNights, String bookingName, int[] roomAmounts) throws ParseException{
 		HotelManager manager = new HotelManager();
 
 		int dateInt = (int) convertDate(date);
@@ -55,7 +55,7 @@ class UserInterface {
 	public long convertDate(String date) throws ParseException{
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Date d = df.parse(date);
-		int dateInt = (int) (d.getTime()/ (24 * 60 * 60 * 1000)-16800);// breyta í 16802 ef fyrsti dagur � t�flu er 1 en ekki 0
+		int dateInt = (int) (d.getTime()/ (24 * 60 * 60 * 1000)-16800);
 		return dateInt;
 	}
 
@@ -67,6 +67,10 @@ class UserInterface {
 		int[] arr = {1,2,0,0};
 		//searchHotel(dags, fjoldi notta,stadsetning, nafn, stjornur, maxprice, roomamounts[] )
 		displayResult(session.searchHotel("20160101", 2, "", "",2,-1,arr));
+		Hotel[] hotel = session.searchHotel("20160101", 2, "", "",2,-1,arr);
+		//String bookHotel(Hotel hotel, String date, int nrOfNights, String bookingName, int[] roomAmounts, int whichLine)
+		String a = session.bookHotel(hotel[0], "20160101", 2, "ipe", arr);
+		System.out.println(a);
 
 			
 	}	
