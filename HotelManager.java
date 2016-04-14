@@ -3,9 +3,9 @@ public class HotelManager {
 
 	
 	public Hotel[] searchHotel(int date, int nrOfNights, String Loc, String name,
-									int stars, int[] roomAmounts, int MaxPrice){
+									int stars, int MaxPrice, int[] roomAmounts){
 		DBManager dbsearch = new DBManager();
-		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, roomAmounts, MaxPrice);
+		Hotel[] foundHotels = dbsearch.searchHotel(date, nrOfNights, Loc, name, stars, MaxPrice, roomAmounts);
 		return foundHotels;
 	}
 	
@@ -15,12 +15,6 @@ public class HotelManager {
 		return booking;
 	}
 	
-	
-	// reviews = HotelManager.getReviews()
-	public Review[] getReviews(){
-		//need to find reviews
-		Review[] reviews = new Review[1];
-		return reviews;
-	}
+
 	
 }

@@ -23,13 +23,13 @@ class UserInterface {
 
 
 	public Hotel[] searchHotel(String date, int nrOfNights,  int nrOfPersons, String loc, String name, int stars,
-			int[] roomAmounts, int minPrice, int maxPrice) throws ParseException{
+			int maxPrice, int[] roomAmounts) throws ParseException{
 		HotelManager manager = new HotelManager();
 
 		int dateInt = (int) convertDate(date);
 		
 		
-		return  manager.searchHotel(dateInt, nrOfNights, loc, name, stars, roomAmounts, maxPrice);	
+		return  manager.searchHotel(dateInt, nrOfNights, loc, name, stars, maxPrice, roomAmounts);	
 	}
 
 	
@@ -66,7 +66,7 @@ class UserInterface {
 		UserInterface session = new UserInterface();	
 		int[] arr = {1,2,0,0};
 
-		displayResult(session.searchHotel("20161231", 2,2, "dd", "ff",4,arr, 2, 8));
+		displayResult(session.searchHotel("20161231", 2,2, "dd", "ff",4,8,arr));
 
 			
 	}	
