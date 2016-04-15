@@ -25,14 +25,14 @@ public class DBManager {
 			//String sql = "Select * from Hotels, Rooms where Hotels.Id = Rooms.HotelId;";
 			String nameString = "";
 			if(!HotelName.isEmpty()){
-				nameString = "Hotels.Name ='"+HotelName+"'";
+				nameString = "Hotels.Name LIKE'%"+HotelName+"%'";
 			}
 			else{
 				nameString = "Hotels.Name IS NOT NULL";
 			}
 			String LocationString = "";
 			if(!Loc.isEmpty()){
-				LocationString = "Hotels.Location ='"+Loc+"'";
+				LocationString = "Hotels.Location LIKE'%"+Loc+"%'";
 			}
 			else{
 				LocationString = "Hotels.Location IS NOT NULL";
@@ -60,7 +60,6 @@ public class DBManager {
 				String Location = rs.getString("Location");
 				String description = rs.getString("Description");
 				if(areThereRoomsAvailable(date, nrOfNights, roomAmounts,HotelID) && MaxPrice >= totalPrice){
-					System.out.println(currHotelName);
 					Hotel newHotel = new Hotel(currHotelName, HotelStars,HotelPrice, Location, HotelID, description);
 					hotelsFound[countFound] = newHotel;
 					countFound++;

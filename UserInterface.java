@@ -63,13 +63,49 @@ class UserInterface {
 
 	public static  void main(String[] args) throws ParseException{
 
+		//Daemi um notkun:
+		//Buum til nytt userinterface, thad hefur search og book adferdir
 		UserInterface session = new UserInterface();	
-		int[] arr = {1,2,0,0};
-		//searchHotel(dags, fjoldi notta,stadsetning, nafn, stjornur, maxprice, roomamounts[] )
-		displayResult(session.searchHotel("20160101", 2, "", "",2,-1,arr));
-		Hotel[] hotel = session.searchHotel("20160101", 2, "", "",2,-1,arr);
+		//Buum til samsetningu af herbergjum. Fylkid arr segir til um hve morg herbergi
+		//skal boka af hverri herbergistegund. Fyrsta stakid taknar fjolda einstaklingsherbergja,
+		//annad stakid taknar fjolda 2-manna herbergja, thridja stakid fjolda 3-manna herbergja
+		//og fjorda stakid fjolda 4-manna herbergja.
+		int[] arr = {1,1,0,0};
+		//Leytum ad hoteli fyrir gefna upphafsdagsetningu, fjolda notta sem skal gista, stadsetningu,
+		//nafn a hoteli, lagmarks stjornur, hamarksverd fyrir alla bokunina og samsetningu a herbergjum.
+		//dagsetning skal vera strengur a forminu "yyyymmdd".
+		//eingongu er haegt ad boka 1-4 manna herbergi.
+		
+		//nafn skal vera strengur, 
+		
+		//Leytum ad hoteli fyrir gefna upphafsdagsetningu, 
+		//dagsetning skal vera strengur a forminu "yyyymmdd".
+		String date = "20160801";
+		//Fjoldi notta sem skal gista
+		int nrOfNights = 2;
+		//location tharf ad vera strengur, ma vera tomi strengurinn. Ef thad er tomi strengurinn er
+		// ekk gerd krafa a stadsetningu i leitinni.
+		String hotelLocation = "";
+		//hotelName tharf ad vera strengur, ef tomi strengurinn er ekki gerd krafa a nafn
+		//Leitad er eftir nofnum sem eru sem likust gefnum streng ef eitthvad er skrifad.
+		String hotelName = "Fo";
+		//Lagmarksfjoldi stjarna. Setja neikvaeda tolu ef alveg sama um lagmarks stjornur
+		int minStars = 2;
+		//Hamarksverd fyrir alla bokunina. Setja neikvaeda tolu ef alveg sama um hamarks verd
+		int MaxPrice = -1;
+		//searchHotel(date, nrOfNights,hotelLocation, hotelName, minStars, MaxPrice, arr )
+
+		
+		//Synum nidurstodurnar
+		displayResult(session.searchHotel(date, nrOfNights, hotelLocation, hotelName,minStars,MaxPrice,arr));
+		//Vistum nidrustodurnar i fylki af hotelum
+		Hotel[] hotel = session.searchHotel(date, nrOfNights, hotelLocation, hotelName,minStars,MaxPrice,arr);
 		//String bookHotel(Hotel hotel, String date, int nrOfNights, String bookingName, int[] roomAmounts, int whichLine)
-		String a = session.bookHotel(hotel[0], "20160101", 2, "ipe", arr);
+		
+		//Booking name er nafn adila sem bokar. 
+		String bookingName = "Balli";
+		//Bokum hotel sem er hluti af listanum sem search skilar. 
+		String a = session.bookHotel(hotel[0], date, nrOfNights, bookingName, arr);
 		System.out.println(a);
 
 			
